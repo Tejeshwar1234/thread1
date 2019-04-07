@@ -103,8 +103,8 @@ The variables representing the average, minimum, and maximum values will be stor
     for(i = 0; i < sz; i++)
     {
         avg += (copy->values[i]);    
-    }                               //If I used double for avg it would have given 82.8571 which doesn't match the example output
-    avg = (int)(avg / sz);          //Used cast to match example output given on instructions.
+    }                               
+    avg = (int)(avg / sz);          
     }
 
     void *min(void *ptr)
