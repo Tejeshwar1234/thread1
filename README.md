@@ -61,5 +61,25 @@ main(int argc, char *argv[])
         fprintf(stderr,"Error - pthread_create() return code: %d\n", t1);
         exit(EXIT_FAILURE);
     }
-   
+    t2 = pthread_create(&thread2, NULL, (void *) min, (void *) &ds);
+    if(t2)
+    {
+        fprintf(stderr,"Error - pthread_create() return code: %d\n",t2);
+        exit(EXIT_FAILURE);
+    }
+     
+    t3 = pthread_create(&thread3, NULL, (void *) max, (void *) &ds);
+    if(t3)
+    {
+        fprintf(stderr,"Error - pthread_create() return code: %d\n", t3);
+        exit(EXIT_FAILURE);
+    }
+ 
+    printf("pthread_create() for Thread 1 returns: %d\n",t1);
+    printf("pthread_create() for Thread 2 returns: %d\n",t2);
+    printf("pthread_create() for Thread 3 returns: %d\n\n",t3);
+ 
+    /* Wait till threads are complete before main continues. */
+ 
+    
    
