@@ -9,26 +9,26 @@ The maximum value is 95
 The variables representing the average, minimum, and maximum values will be stored globally. The worker threads will set these values, and the parent thread will output the values once the workers have exited. 
 
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <pthread.h>
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <pthread.h>
  
-void *avg(void *str);
-void *min(void *ptr);
-void *max(void *ptr);
+    void *avg(void *str);
+    void *min(void *ptr);
+    void *max(void *ptr);
 
-double avg;        
-int min;
-int max;
+    double avg;        
+    int min;
+    int max;
 
-typedef struct datastruct
-{
+    typedef struct datastruct
+    {
     int size;
     int * values;
-}datastruct;
+    }datastruct;
 
-main(int a, char *r[])
-{
+    main(int a, char *r[])
+    {
 	printf("\n\nWelcome to paheeThredz, by Sean Staz\n\n");
     while(argc <=1)
     {
