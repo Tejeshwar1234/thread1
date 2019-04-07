@@ -27,7 +27,7 @@ typedef struct datastruct
     int * values;
 }datastruct;
 
-main(int argc, char *argv[])
+main(int a, char *r[])
 {
 	printf("\n\nWelcome to paheeThredz, by Sean Staz\n\n");
     while(argc <=1)
@@ -38,10 +38,10 @@ main(int argc, char *argv[])
 	}
     
     int i = 0;
-    int copy[argc-1];
-    for(i; i < (argc -1); i++)
+    int copy[a-1];
+    for(i; i < (a -1); i++)
     {
-        copy[i] = atoi(argv[i+1]);
+        copy[i] = atoi(r[i+1]);
     }
         
     pthread_t thread1, thread2, thread3;
@@ -52,7 +52,7 @@ main(int argc, char *argv[])
  
     printf("Running: %s\n\n", argv[0]);
     
-    datastruct ds = {argc - 1, copy};
+    datastruct ds = {a - 1, copy};
  
    
     t1 = pthread_create(&thread1, NULL, (void *) avg, (void *) &ds);
