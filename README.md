@@ -81,5 +81,67 @@ main(int a, char *r[])
  
     /* Wait till threads are complete before main continues. */
  
+    pthread_join(thread1, NULL);
+    pthread_join(thread2, NULL);
+    pthread_join(thread3, NULL);
+ 
+    printf("The average:  %g\n", avg);
+    printf("The minimum:  %d\n", min);
+    printf("The maximum:  %d\n", max);
+ 
+    exit(EXIT_SUCCESS);
+}
+ 
+    void *avg(void *ptr)
+    {
+    datastruct * copy;
+    copy = (datastruct *) ptr;
     
+    int sz = copy->size;
+    int i;
+    
+    for(i = 0; i < sz; i++)
+    {
+        avg += (copy->values[i]);    
+    }                               //If I used double for avg it would have given 82.8571 which doesn't match the example output
+    avg = (int)(avg / sz);          //Used cast to match example output given on instructions.
+    }
+
+    void *min(void *ptr)
+    {
+    datastruct * copy;
+    copy = (datastruct *) ptr;
+    
+    int sz = copy->size;
+    int i;
+    
+    min = (copy->values[0]);
+    for(i = 1; i < sz; i++)
+    {
+        if(min > (copy->values[i]))
+        {
+            min = (copy->values[i]);
+        }
+    }
+    }
+
+    void *max(void *ptr)
+    {
+    datastruct * copy;
+    copy = (datastruct *) ptr;
+    
+    int sz = copy->size;
+    int i;
+    
+    max = copy->values[0];
+    
+    for(i = 1; i < sz; i++)
+    {
+        if(max < copy->values[i])
+        {
+            max = copy->values[i];
+        }
+    }
+    }
+ 
    
