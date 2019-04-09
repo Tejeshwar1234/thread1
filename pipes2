@@ -76,5 +76,47 @@
   perror("Failed to fork process");
   return EXIT_FAILURE;
  }
+  if (pid == 0)
+ {
+  close(fd[P1_READ]);
+  close(fd[P1_WRITE]);
+
+  pid = getpid();
+
+       
+  len = read(fd[P2_READ], &child, len);
+  if (len < 0)
+ {
+  perror("Child: Failed to read data from pipe");
+  exit(EXIT_FAILURE);
+ }
+  else if (len == 0)
+ {
+            // not an error, but certainly unexpected
+  fprintf(stderr, "Child: Read EOF from pipe");
+ }
+  else
+ {
+
+             
+  printf("Child(%d): Recieved Message\n\nChild(%d): Toggling Case and Sending to Parent\n",pid, pid);
+
+            // send the message to toggleString and write it to pipe//
+  if (write(fd[P2_WRITE], toggleString(child), strlen(child)) < 0)
+ {
+  perror("Child: Failed to write response value");
+  exit(EXIT_FAILURE);
+
+ }
+        
+ }
+
+       
+  close(fd[P2_READ]);
+  close(fd[P2_WRITE]);
+
+  return EXIT_SUCCESS;
+ }
  
+
  
