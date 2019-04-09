@@ -117,6 +117,41 @@
 
   return EXIT_SUCCESS;
  }
+  close(fd[P2_READ]);
+  close(fd[P2_WRITE]);
+
+  
+  pid = getpid();
+
+    
+    
+  printf("\nParent(%d): Sending %s to Child\n\n", pid, argv[1]);
+  if (write(fd[P1_WRITE], argv[1], strlen(argv[1])) != strlen(argv[1]))
+ {
+  perror("Parent: Failed to send value to child ");
+  exit(EXIT_FAILURE);
+ }
+
+  len = read(fd[P1_READ], &parent, strlen(parent));
+  if (len < 0)
+ {
+  perror("Parent: failed to read value from pipe");
+  exit(EXIT_FAILURE);
+ }
+  else if (len == 0)
+ {   
+  fprintf(stderr, "Parent(%d): Read EOF from pipe", pid);
+ }
+  else
+ { 
+  printf("\nParent(%d): Received %s from Child\n\n", pid, parent);
+ }
+  close(fd[P1_READ]);
+  close(fd[P1_WRITE]);
+  wait(NULL);
+  return EXIT_SUCCESS;
+ }
+ 
  
 
  
